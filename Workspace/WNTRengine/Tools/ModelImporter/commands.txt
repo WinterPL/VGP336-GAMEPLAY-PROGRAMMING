@@ -1,0 +1,11 @@
+-scale 0.01 ../../Assets/Models/Character/Character.fbx ../../Assets/Models/Character/Character.model
+
+-scale 0.01 -animOnly 1 ../../Assets/Models/Character/Walking.fbx ../../Assets/Models/Character/Walking.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Character/Flair.fbx ../../Assets/Models/Character/Flair.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Character/SillyDancing.fbx ../../Assets/Models/Character/SillyDancing.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Character/BrooklynUprock.fbx ../../Assets/Models/Character/BrooklynUprock.model
+
+-scale 0.01 -animOnly 1 ../../Assets/Models/Character/Running.fbx ../../Assets/Models/Character/Running.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Character/walking.fbx ../../Assets/Models/Character/walking.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Character/walkback.fbx ../../Assets/Models/Character/walkback.model
+-scale 0.01 -animOnly 1 ../../Assets/Models/Character/ForwardFlip.fbx ../../Assets/Models/Character/ForwardFlip.model
