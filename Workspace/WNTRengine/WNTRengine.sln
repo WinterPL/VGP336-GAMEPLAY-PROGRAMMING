@@ -103,6 +103,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "20_HelloSoftBody", "VGP334\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Hello VGP334 Final", "VGP334\Hello VGP334 Final\Hello VGP334 Final.vcxproj", "{FFB06A99-4CBF-4112-ADC4-C1084473C86D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VGP336", "VGP336", "{AB698531-1923-4765-BC40-9BA049C0173C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
