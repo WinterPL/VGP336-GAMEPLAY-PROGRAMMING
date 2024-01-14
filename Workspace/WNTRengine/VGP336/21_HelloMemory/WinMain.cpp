@@ -26,16 +26,18 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE, LPSTR, int)
 {
 	TypedAllocator StudentPool = TypedAllocator<Student>("StudentPool", 100);
 
-	Student* a = StudentPool.New("Jon");
-	Student* b = StudentPool.New("Winter");
-
 	std::vector<Student*> students;
-
-
+	int count = 100;
+	for(int i =0; i< 100; ++i)
+	{
+		std::string name = "Student" + std::to_string(i);
+		students.push_back(StudentPool.New(name));
+	}
 	//do stuff
-
-	StudentPool.Delete(a);
-	StudentPool.Delete(b);
+	for (auto student : students)
+	{
+	StudentPool.Delete(student);
+	}
 
 
 	return (0);
