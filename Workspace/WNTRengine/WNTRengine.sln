@@ -107,6 +107,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VGP336", "VGP336", "{AB6985
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "21_HelloMemory", "VGP336\21_HelloMemory\21_HelloMemory.vcxproj", "{9876DA94-ABAB-44B6-B4A9-E66E0D29EC4E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "22_HelloGameObject", "VGP336\22_HelloGameObject\22_HelloGameObject.vcxproj", "{089250FE-7E46-4301-9008-973ECD6AC92B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Template", "Template", "{B02138A4-F0C1-4F2A-8CEF-2E21E6538165}"
+	ProjectSection(SolutionItems) = preProject
+		Assets\Templates\test_Object.json = Assets\Templates\test_Object.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -379,6 +386,14 @@ Global
 		{9876DA94-ABAB-44B6-B4A9-E66E0D29EC4E}.Release|x64.Build.0 = Release|x64
 		{9876DA94-ABAB-44B6-B4A9-E66E0D29EC4E}.Release|x86.ActiveCfg = Release|Win32
 		{9876DA94-ABAB-44B6-B4A9-E66E0D29EC4E}.Release|x86.Build.0 = Release|Win32
+		{089250FE-7E46-4301-9008-973ECD6AC92B}.Debug|x64.ActiveCfg = Debug|x64
+		{089250FE-7E46-4301-9008-973ECD6AC92B}.Debug|x64.Build.0 = Debug|x64
+		{089250FE-7E46-4301-9008-973ECD6AC92B}.Debug|x86.ActiveCfg = Debug|Win32
+		{089250FE-7E46-4301-9008-973ECD6AC92B}.Debug|x86.Build.0 = Debug|Win32
+		{089250FE-7E46-4301-9008-973ECD6AC92B}.Release|x64.ActiveCfg = Release|x64
+		{089250FE-7E46-4301-9008-973ECD6AC92B}.Release|x64.Build.0 = Release|x64
+		{089250FE-7E46-4301-9008-973ECD6AC92B}.Release|x86.ActiveCfg = Release|Win32
+		{089250FE-7E46-4301-9008-973ECD6AC92B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -419,6 +434,8 @@ Global
 		{0D3BA0A4-3294-45D4-ABAC-A1AC6E9341E3} = {6FBBD8B3-F4BD-484B-9AEE-DF1F3F1B1598}
 		{FFB06A99-4CBF-4112-ADC4-C1084473C86D} = {6FBBD8B3-F4BD-484B-9AEE-DF1F3F1B1598}
 		{9876DA94-ABAB-44B6-B4A9-E66E0D29EC4E} = {AB698531-1923-4765-BC40-9BA049C0173C}
+		{089250FE-7E46-4301-9008-973ECD6AC92B} = {AB698531-1923-4765-BC40-9BA049C0173C}
+		{B02138A4-F0C1-4F2A-8CEF-2E21E6538165} = {A00DCE90-84B7-4F9C-8431-850600A737FD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {010E0B6F-B2FD-4AD9-A2B3-9FF364F73B7A}

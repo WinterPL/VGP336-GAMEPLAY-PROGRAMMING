@@ -146,6 +146,9 @@
     <ProjectReference Include="..\..\Engine\WNTRengine.vcxproj">
       <Project>{1b572444-1cd1-4089-89ae-10c1ceb8f3fb}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\External\Bullet\Bullet.vcxproj">
+      <Project>{516192eb-788a-4fe7-b2b7-2ef9ac036b12}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameState.h" />

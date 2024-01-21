@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{acb34193-c667-47a3-8e26-717b24532a03}</ProjectGuid>
-    <RootNamespace>My19HelloParticles</RootNamespace>
+    <ProjectGuid>{089250fe-7e46-4301-9008-973ecd6ac92b}</ProjectGuid>
+    <RootNamespace>My22HelloGameObject</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -146,20 +146,13 @@
     <ProjectReference Include="..\..\Engine\WNTRengine.vcxproj">
       <Project>{1b572444-1cd1-4089-89ae-10c1ceb8f3fb}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\External\Bullet\Bullet.vcxproj">
-      <Project>{516192eb-788a-4fe7-b2b7-2ef9ac036b12}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameState.cpp" />
-    <ClCompile Include="Particle.cpp" />
-    <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameState.h" />
-    <ClInclude Include="Particle.h" />
-    <ClInclude Include="ParticleSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
