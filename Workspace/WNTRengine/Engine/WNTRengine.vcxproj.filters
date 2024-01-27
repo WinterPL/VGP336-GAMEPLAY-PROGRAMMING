@@ -7,6 +7,18 @@
     <Filter Include="Src">
       <UniqueIdentifier>{4930b067-7955-4f5a-b552-12a411df684c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Inc\Components">
+      <UniqueIdentifier>{e44074d5-13ff-49d0-b7b0-0dc9485d18d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Components">
+      <UniqueIdentifier>{6add09a3-1eeb-4dd5-beaa-34afb5108727}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Services">
+      <UniqueIdentifier>{35e6abe3-02b6-440a-96cd-ceba0e0847a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inc\Services">
+      <UniqueIdentifier>{2fb13de7-37cf-4445-a4df-d4151e075e2a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Inc\Common.h">
@@ -27,16 +39,31 @@
     <ClInclude Include="Inc\GameObject.h">
       <Filter>Inc</Filter>
     </ClInclude>
-    <ClInclude Include="Inc\Component.h">
-      <Filter>Inc</Filter>
-    </ClInclude>
-    <ClInclude Include="Inc\TransformComponent.h">
-      <Filter>Inc</Filter>
-    </ClInclude>
     <ClInclude Include="Inc\TypeIds.h">
       <Filter>Inc</Filter>
     </ClInclude>
     <ClInclude Include="Inc\GameObjectFactory.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Component.h">
+      <Filter>Inc\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\TransformComponent.h">
+      <Filter>Inc\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Service.h">
+      <Filter>Inc\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\CameraService.h">
+      <Filter>Inc\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\CameraComponent.h">
+      <Filter>Inc\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\GameWorld.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\GameObjectHandle.h">
       <Filter>Inc</Filter>
     </ClInclude>
   </ItemGroup>
@@ -53,10 +80,19 @@
     <ClCompile Include="Src\GameObject.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\TransformComponent.cpp">
+    <ClCompile Include="Src\GameObjectFactory.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Src\GameObjectFactory.cpp">
+    <ClCompile Include="Src\TransformComponent.cpp">
+      <Filter>Src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\CameraService.cpp">
+      <Filter>Src\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\CameraComponent.cpp">
+      <Filter>Src\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GameWorld.cpp">
       <Filter>Src</Filter>
     </ClCompile>
   </ItemGroup>

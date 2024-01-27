@@ -8,7 +8,16 @@ namespace WNTRengine
 	{
 		Invalid,
 		Transform,
+		Camera,
 
+
+		Count
+	};
+
+	enum class ServiceId
+	{
+		Invalid,
+		Camera,
 
 		Count
 	};

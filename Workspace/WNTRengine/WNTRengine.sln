@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32228.343
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{A00DCE90-84B7-4F9C-8431-850600A737FD}"
 EndProject
@@ -113,6 +113,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Template", "Template", "{B0
 	ProjectSection(SolutionItems) = preProject
 		Assets\Templates\test_Object.json = Assets\Templates\test_Object.json
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "22_HelloGameWorld", "VGP336\22_HelloGameWorld\22_HelloGameWorld.vcxproj", "{8877E313-BFBC-4DFD-80A5-C1EFB912ECEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -394,6 +396,14 @@ Global
 		{089250FE-7E46-4301-9008-973ECD6AC92B}.Release|x64.Build.0 = Release|x64
 		{089250FE-7E46-4301-9008-973ECD6AC92B}.Release|x86.ActiveCfg = Release|Win32
 		{089250FE-7E46-4301-9008-973ECD6AC92B}.Release|x86.Build.0 = Release|Win32
+		{8877E313-BFBC-4DFD-80A5-C1EFB912ECEC}.Debug|x64.ActiveCfg = Debug|x64
+		{8877E313-BFBC-4DFD-80A5-C1EFB912ECEC}.Debug|x64.Build.0 = Debug|x64
+		{8877E313-BFBC-4DFD-80A5-C1EFB912ECEC}.Debug|x86.ActiveCfg = Debug|Win32
+		{8877E313-BFBC-4DFD-80A5-C1EFB912ECEC}.Debug|x86.Build.0 = Debug|Win32
+		{8877E313-BFBC-4DFD-80A5-C1EFB912ECEC}.Release|x64.ActiveCfg = Release|x64
+		{8877E313-BFBC-4DFD-80A5-C1EFB912ECEC}.Release|x64.Build.0 = Release|x64
+		{8877E313-BFBC-4DFD-80A5-C1EFB912ECEC}.Release|x86.ActiveCfg = Release|Win32
+		{8877E313-BFBC-4DFD-80A5-C1EFB912ECEC}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -436,6 +446,7 @@ Global
 		{9876DA94-ABAB-44B6-B4A9-E66E0D29EC4E} = {AB698531-1923-4765-BC40-9BA049C0173C}
 		{089250FE-7E46-4301-9008-973ECD6AC92B} = {AB698531-1923-4765-BC40-9BA049C0173C}
 		{B02138A4-F0C1-4F2A-8CEF-2E21E6538165} = {A00DCE90-84B7-4F9C-8431-850600A737FD}
+		{8877E313-BFBC-4DFD-80A5-C1EFB912ECEC} = {AB698531-1923-4765-BC40-9BA049C0173C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {010E0B6F-B2FD-4AD9-A2B3-9FF364F73B7A}

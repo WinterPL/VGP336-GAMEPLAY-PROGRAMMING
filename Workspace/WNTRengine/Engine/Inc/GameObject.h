@@ -1,5 +1,6 @@
 #pragma once
 
+#include "GameObjectHandle.h"
 #include "Component.h"
 
 namespace WNTRengine
@@ -16,6 +17,11 @@ namespace WNTRengine
 		void SetName(const std::string& name) {mName = std::move(name);}
 		const std::string& GetName() const { return mName; }
 		uint32_t GetUniqueId() const { return mUniqueId; }
+
+		GameWorld& GetWorld(){ return *mWorld; }
+		const GameWorld& GetWorld() const{ return *mWorld; }
+		const GameObjectHandle& GetHandle() const { return mHandle; }
+
 
 		template<class ComponentType>
 		ComponentType* AddComponent()
@@ -43,8 +49,43 @@ namespace WNTRengine
 
 			return false;
 		}
+		template<class ComponentType>
+		ComponentType* GetComponent()
+		{
+			static_assert(std::is_base_of_v<Component, ComponentType>, "GameObject : ComponentType must be the type of Component");
+
+			for (auto& component : mComponents)
+			{
+				if (component->GetTypeId() == ComponentType::StaticGetTypeId())
+				{
+					return static_cast<ComponentType*>(component.get());
+				}
+			}
+
+			return nullptr;
+		}
+		template<class ComponentType>
+		const ComponentType* GetComponent() const
+		{
+			static_assert(std::is_base_of_v<Component, ComponentType>, "GameObject : ComponentType must be the type of Component");
+
+			for (auto& component : mComponents)
+			{
+				if (component->GetTypeId() == ComponentType::StaticGetTypeId())
+				{
+					return static_cast<ComponentType*>(component.get());
+				}
+			}
+
+			return nullptr;
+		}
+
 
 	private:
+		friend class GameWorld;
+		GameWorld* mWorld = nullptr;
+		GameObjectHandle mHandle;
+
 		std::string mName = "EMPTY";
 		bool mInitialized = false;
 		uint32_t mUniqueId = 0;
