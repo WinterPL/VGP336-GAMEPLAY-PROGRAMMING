@@ -5,6 +5,13 @@
 using namespace WNTRengine;
 using namespace WNTRengine::Graphics;
 
+void CameraService::DebugUI()
+{
+	SimpleDraw::Render(GetMain());
+}
+
+
+
 const Graphics::Camera& CameraService::GetMain() const
 {
 	ASSERT(mMainCamera != nullptr, "CameraService : has no main camera");

@@ -25,7 +25,7 @@ namespace WNTRengine
 			static_assert(std::is_base_of_v<Service, ServiceType>, "GameWorld: Service must be type service");
 			ASSERT(!mInitialized, "GameWorld: can't add service after world is initialized");
 			auto& newService = mServices.emplace_back(std::make_unique<ServiceType>());
-
+			newService->mWorld = this;
 			return static_cast<ServiceType*>(newService.get());
 		}
 
@@ -38,8 +38,8 @@ namespace WNTRengine
 				{
 					return static_cast<ServiceType*>(service.get());
 				}
-				return nullptr;
 			}
+			return nullptr;
 		}
 		template<class ServiceType>
 		const ServiceType* GetService() const

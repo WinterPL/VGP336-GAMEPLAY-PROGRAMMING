@@ -4,6 +4,8 @@
 
 namespace WNTRengine
 {
+	class GameWorld;
+
 	class Service
 	{
 	public:
@@ -24,6 +26,11 @@ namespace WNTRengine
 		virtual void Render() {}
 		virtual void DebugUI() {}
 
+		GameWorld& GEtWorld() { return *mWorld; }
+		const GameWorld& GEtWorld() const { return *mWorld; }
+	private:
+		friend class GameWorld;
+		GameWorld* mWorld = nullptr;
 
 	};
 

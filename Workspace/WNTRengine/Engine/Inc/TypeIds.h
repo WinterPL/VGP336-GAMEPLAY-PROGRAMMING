@@ -9,7 +9,7 @@ namespace WNTRengine
 		Invalid,
 		Transform,
 		Camera,
-
+		FPSCamera,
 
 		Count
 	};
@@ -18,6 +18,7 @@ namespace WNTRengine
 	{
 		Invalid,
 		Camera,
+		Update,
 
 		Count
 	};

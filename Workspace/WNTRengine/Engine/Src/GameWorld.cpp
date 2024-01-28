@@ -30,6 +30,7 @@ void GameWorld::Terminate()
 		if (slot.gameObject != nullptr)
 		{
 			slot.gameObject->Terminate();
+			slot.gameObject.reset();
 		}
 	}
 	for (auto& service : mServices) {
@@ -56,6 +57,14 @@ void GameWorld::DebugUI()
 	for (auto& service : mServices) {
 		service->DebugUI();
 	}
+
+	for (auto& slot : mGameObjectSlots) {
+		if (slot.gameObject != nullptr)
+		{
+			slot.gameObject->DebugUI();
+		}
+	}
+
 }
 
 GameObject* GameWorld::CreateGameObject(const std::filesystem::path& templateFile)
@@ -86,19 +95,50 @@ GameObject* GameWorld::CreateGameObject(const std::filesystem::path& templateFil
 
 GameObject* GameWorld::GetGameObject(const GameObjectHandle& handle)
 {
-	return nullptr;
+	if (!IsValid(handle))
+	{
+		return nullptr;
+	}
+	return mGameObjectSlots[handle.mIndex].gameObject.get();
 }
 void GameWorld::DestroyGameObject(const GameObjectHandle& handle)
 {
+	if (!IsValid(handle))
+	{
+		return;
+	}
 
+	Slot& slot = mGameObjectSlots[handle.mIndex];
+	slot.generation++;
+	mToBeDestroyed.push_back(handle.mIndex);
 }
 
 
 bool GameWorld::IsValid(const GameObjectHandle& handle)
 {
-	return false;
+	if (handle.mIndex < 0 || handle.mIndex >= mGameObjectSlots.size())
+	{
+		return false;
+	}
+	if (mGameObjectSlots[handle.mIndex].generation != handle.mGeneration)
+	{
+		return false;
+	}
+	return true;
 }
 void GameWorld::ProcessDestroyList()
 {
+	ASSERT(!mUpdating, "GameWorld: can't destroy while updating");
+	for (uint32_t index : mToBeDestroyed)
+	{
+		Slot& slot = mGameObjectSlots[index];
 
+		GameObject* gameObject = slot.gameObject.get();
+		ASSERT(!IsValid(gameObject->GetHandle()), "GamWordl:object is still Alive");
+		
+		gameObject->Terminate();
+		slot.gameObject.reset();
+		mFreeSlots.push_back(index);
+	}
+	mToBeDestroyed.clear();
 }

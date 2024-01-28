@@ -12,6 +12,8 @@ namespace WNTRengine
 		void Initialize() override;
 		void Terminate() override;
 
+		void DeSerialize(rapidjson::Value& value) override;
+
 		Graphics::Camera& GetCamera() { return mCamera; }
 		const Graphics::Camera& GetCamera() const { return mCamera; }
 

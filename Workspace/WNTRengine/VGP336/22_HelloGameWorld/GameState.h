@@ -15,10 +15,7 @@ public:
 	void DebugUI();
 
 protected:
-	GameObject mGameObject;
-	GameObject mCameraGameObject1;
-	GameObject mCameraGameObject2;
-	CameraService mCameraService;
+	GameWorld mGameWorld;
 };
 
 

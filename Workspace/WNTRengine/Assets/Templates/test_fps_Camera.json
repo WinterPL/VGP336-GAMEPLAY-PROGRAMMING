@@ -1,0 +1,15 @@
+{
+  "Components": {
+    "TrasnformComponent": {
+
+    },
+    "CameraComponent": {
+      "Position": [ 0.0, 1.5, -4.0 ],
+      "LookAt": [ 0.0, 0.0, 0.0 ]
+    },
+    "FPSCameraController": {
+      "MoveSpeed": 2.0,
+      "TurnSpeed": 0.13
+    }
+  }
+}
