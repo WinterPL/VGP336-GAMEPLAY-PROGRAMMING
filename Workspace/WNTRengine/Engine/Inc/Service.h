@@ -26,8 +26,12 @@ namespace WNTRengine
 		virtual void Render() {}
 		virtual void DebugUI() {}
 
-		GameWorld& GEtWorld() { return *mWorld; }
-		const GameWorld& GEtWorld() const { return *mWorld; }
+		//Serialize and deserialize
+		virtual void Serialize(rapidjson::Document& doc, rapidjson::Value& value) {}
+		virtual void DeSerialize(rapidjson::Value& value) {}
+
+		GameWorld& GetWorld() { return *mWorld; }
+		const GameWorld& GetWorld() const { return *mWorld; }
 	private:
 		friend class GameWorld;
 		GameWorld* mWorld = nullptr;

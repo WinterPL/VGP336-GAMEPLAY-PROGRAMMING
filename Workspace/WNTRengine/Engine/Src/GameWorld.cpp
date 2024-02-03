@@ -2,6 +2,11 @@
 #include "GameWorld.h"
 
 #include "GameObjectFactory.h"
+#include "CameraService.h"
+#include "UpdateService.h"
+#include "RenderService.h"
+
+#include "TransformComponent.h"
 
 using namespace WNTRengine;
 
@@ -111,6 +116,71 @@ void GameWorld::DestroyGameObject(const GameObjectHandle& handle)
 	Slot& slot = mGameObjectSlots[handle.mIndex];
 	slot.generation++;
 	mToBeDestroyed.push_back(handle.mIndex);
+}
+
+void GameWorld::loadLevel(const std::filesystem::path& levelFile)
+{
+	FILE* file = nullptr;
+	auto err = fopen_s(&file, levelFile.u8string().c_str(), "r");
+	ASSERT(err == 0 && file != nullptr, "GameWorld: failed to load level %s", levelFile.u8string().c_str());
+	
+	char readBuffer[65536];
+	rapidjson::FileReadStream readStream(file, readBuffer, sizeof(readBuffer));
+	fclose(file);
+
+	rapidjson::Document doc;
+	doc.ParseStream(readStream);
+
+	auto services = doc["Services"].GetObj();
+	for (auto& service : services)
+	{
+		const char* serviceName = service.name.GetString();
+		if (strcmp(serviceName, "CameraService") == 0)
+		{
+			CameraService* cameraService = AddService<CameraService>();
+			cameraService->DeSerialize(service.value);
+		}
+		else if (strcmp(serviceName, "UpdateService") == 0)
+		{
+			UpdateService* updateService = AddService<UpdateService>();
+			updateService->DeSerialize(service.value);
+		}
+		else if (strcmp(serviceName, "RenderService") == 0)
+		{
+			RenderService* renderService = AddService<RenderService >();
+			renderService->DeSerialize(service.value);
+		}
+		else
+		{
+			ASSERT(false, "GameWorld: service %s is not defined", serviceName);
+		}
+	}
+	uint32_t capacity = static_cast<uint32_t>(doc["Capacity"].GetInt());
+	Initialize(capacity);
+
+	auto gameObjects = doc["GameObjects"].GetObj();
+	for (auto& gameObject : gameObjects)
+	{
+		const char* templateFile = gameObject.value["Template"].GetString();
+		GameObject* obj = CreateGameObject(templateFile);
+		if (obj != nullptr)
+		{
+			const char* name = gameObject.name.GetString();
+			obj->SetName(name);
+
+			if (gameObject.value.HasMember("Position"))
+			{
+				const auto& pos = gameObject.value["Position"].GetArray();
+				const float x = pos[0].GetFloat();
+				const float y = pos[1].GetFloat();
+				const float z = pos[2].GetFloat();
+
+				TransformComponent* transformComponent = obj->GetComponent<TransformComponent>();
+				transformComponent->position = { x,y,z };
+			}
+		}
+	}
+
 }
 
 

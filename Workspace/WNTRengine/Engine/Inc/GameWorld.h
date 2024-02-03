@@ -1,7 +1,7 @@
 #pragma once
 
-#include "GameObject.h"
 #include "Service.h"
+#include "GameObject.h"
 
 namespace WNTRengine
 {
@@ -18,6 +18,8 @@ namespace WNTRengine
 		GameObject* CreateGameObject(const std::filesystem::path& templateFile);
 		GameObject* GetGameObject(const GameObjectHandle& handle);
 		void DestroyGameObject(const GameObjectHandle& handle);
+
+		void loadLevel(const std::filesystem::path& levelFile);
 
 		template<class ServiceType>
 		ServiceType* AddService() 

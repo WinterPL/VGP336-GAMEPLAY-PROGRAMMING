@@ -5,6 +5,7 @@
 namespace WNTRengine
 {
 	class CameraComponent;
+	class TransformComponent;
 
 	class FPSCameraComponent final : public Component
 	{
@@ -17,6 +18,7 @@ namespace WNTRengine
 		void DeSerialize(rapidjson::Value& value) override;
 
 	private:
+		TransformComponent* mTransformComponent = nullptr;
 		CameraComponent* mCameraComponent = nullptr;
 		float mMoveSpeed = 1.0f;
 		float mTurnSpeed = 0.1f;

@@ -6,13 +6,7 @@ using namespace WNTRengine::Input;
 
 void GameState::Initialize()
 {
-    mGameWorld.AddService<CameraService>();
-    mGameWorld.AddService<UpdateService>();
-    mGameWorld.Initialize(1000);
-    mGameWorld.CreateGameObject("../../Assets/Templates/test_Object.json");
-    mGameWorld.CreateGameObject("../../Assets/Templates/test_Camera.json");
-    mGameWorld.CreateGameObject("../../Assets/Templates/test_fps_Camera.json");
-
+    mGameWorld.loadLevel("../../Assets/Templates/Levels/test_level.json");
 }
 
 void GameState::Terminate()

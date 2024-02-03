@@ -2,6 +2,7 @@
 #include "FPSCameraComponent.h"
 
 #include "CameraComponent.h"
+#include "TransformComponent.h"
 #include "GameWorld.h"
 #include "UpdateService.h"
 
@@ -11,6 +12,7 @@ using namespace WNTRengine::Input;
 
 void FPSCameraComponent::Initialize()
 {
+    mTransformComponent = GetOwner().GetComponent<TransformComponent>();
 	mCameraComponent = GetOwner().GetComponent<CameraComponent>();
 	UpdateService* updateService = GetOwner().GetWorld().GetService<UpdateService>();
 	ASSERT(updateService != nullptr, "FPSCameraComponent: UpdateService is not Available");
@@ -54,6 +56,10 @@ void FPSCameraComponent::Update(float deltaTime)
     if (input->IsMouseDown(MouseButton::RBUTTON)) {
        camera.Yaw(input->GetMouseMoveX() * turnSpeed);
        camera.Pitch(input->GetMouseMoveY() * turnSpeed);
+    }
+    if (mTransformComponent != nullptr)
+    {
+        mTransformComponent->position = camera.GetPosition();
     }
 
 }

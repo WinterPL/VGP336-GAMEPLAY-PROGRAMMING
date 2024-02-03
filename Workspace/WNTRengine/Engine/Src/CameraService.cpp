@@ -41,7 +41,7 @@ void  CameraService::Unregister(const CameraComponent* cameraComponent)
 	{
 		if (mMainCamera == *iter)
 		{
-			mMainCamera == nullptr;
+			mMainCamera = nullptr;
 		}
 		mCameraEntries.erase(iter);
 		if (mMainCamera == nullptr && !mCameraEntries.empty())
