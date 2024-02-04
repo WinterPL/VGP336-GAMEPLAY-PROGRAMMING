@@ -55,7 +55,6 @@ void GameWorld::Render()
 	for (auto& service : mServices) {
 		service->Render();
 	}
-
 }
 void GameWorld::DebugUI()
 {

@@ -5,6 +5,8 @@
 #include "TransformComponent.h"
 #include "CameraComponent.h"
 #include "FPSCameraComponent.h"
+#include "ModelComponent.h"
+#include "MeshComponent.h"
 
 using namespace WNTRengine;
 
@@ -36,10 +38,20 @@ void GameObjectFactory::Make(const std::filesystem::path& templatePath, GameObje
 			CameraComponent* cameraComponent = gameObject.AddComponent<CameraComponent>();
 			cameraComponent->DeSerialize(component.value);
 		}
-		else if (strcmp(componentName, "FPSCameraController") == 0)
+		else if (strcmp(componentName, "FPSCameraComponent") == 0)
 		{
 			FPSCameraComponent* fpsCameraComponent = gameObject.AddComponent<FPSCameraComponent>();
 			fpsCameraComponent->DeSerialize(component.value);
+		}
+		else if (strcmp(componentName, "ModelComponent") == 0)
+		{
+			ModelComponent* modelComponent = gameObject.AddComponent<ModelComponent>();
+			modelComponent->DeSerialize(component.value);
+		}
+		else if (strcmp(componentName, "MeshComponent") == 0)
+		{
+			MeshComponent* meshComponent = gameObject.AddComponent<MeshComponent>();
+			meshComponent->DeSerialize(component.value);
 		}
 		else 
 		{

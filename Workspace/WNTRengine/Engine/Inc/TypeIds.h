@@ -10,6 +10,8 @@ namespace WNTRengine
 		Transform,
 		Camera,
 		FPSCamera,
+		Model,
+		Mesh,
 
 		Count
 	};

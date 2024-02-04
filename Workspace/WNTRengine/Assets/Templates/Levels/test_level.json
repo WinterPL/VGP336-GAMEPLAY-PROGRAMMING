@@ -31,6 +31,10 @@
     "TestObject2": {
       "Template": "../../Assets/Templates/test_Object.json",
       "Position": [ 0.0, 2.0, 0.0 ]
+    },
+    "TestObject3": {
+      "Template": "../../Assets/Templates/test_ground.json",
+      "Position": [ 0.0, -2.0, 0.0 ]
     }
   }
 }

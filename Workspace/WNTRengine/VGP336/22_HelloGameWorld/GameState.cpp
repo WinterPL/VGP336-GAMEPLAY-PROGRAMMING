@@ -16,7 +16,7 @@ void GameState::Terminate()
 
 void GameState::Render()
 {
-
+    mGameWorld.Render();
 }
 
 void GameState::Update(float deltaTime)

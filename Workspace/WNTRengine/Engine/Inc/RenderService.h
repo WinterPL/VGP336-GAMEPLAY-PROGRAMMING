@@ -5,6 +5,9 @@
 namespace WNTRengine
 {
 	class CameraService;
+	class ModelComponent;
+	class TransformComponent;
+	class MeshComponent;
 
 	class RenderService final : public Service
 	{
@@ -19,6 +22,13 @@ namespace WNTRengine
 
 		void DeSerialize(rapidjson::Value& value) override;
 
+		//Register
+		void Register(const ModelComponent* modelComponent);
+		void Unregister(const ModelComponent* modelComponent);
+
+		void Register(const MeshComponent* meshComponent);
+		void Unregister(const MeshComponent* meshComponent);
+
 	private:
 		const CameraService* mCameraService = nullptr;
 
@@ -28,6 +38,15 @@ namespace WNTRengine
 
 		float mFPS = 0.0f;
 
+		struct Entry
+		{
+			const MeshComponent* meshComponent = nullptr;
+			const ModelComponent* modelComponent = nullptr;
+			const TransformComponent* transformComponent = nullptr;
+			Graphics::RenderGroup renderGroup;
+		};
+		using RenderEntities = std::vector<Entry>;
+		RenderEntities mRenderEntries;
 	};
 
 }

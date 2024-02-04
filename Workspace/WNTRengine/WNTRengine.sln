@@ -113,6 +113,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Template", "Template", "{B0
 	ProjectSection(SolutionItems) = preProject
 		Assets\Templates\test_Camera.json = Assets\Templates\test_Camera.json
 		Assets\Templates\test_fps_Camera.json = Assets\Templates\test_fps_Camera.json
+		Assets\Templates\test_ground.json = Assets\Templates\test_ground.json
 		Assets\Templates\test_Object.json = Assets\Templates\test_Object.json
 	EndProjectSection
 EndProject
