@@ -24,6 +24,7 @@
     <ProjectGuid>{8877e313-bfbc-4dfd-80a5-c1efb912ecec}</ProjectGuid>
     <RootNamespace>My22HelloGameWorld</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>23_HelloGameWorld</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -136,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="TypeIds.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Engine\WNTRengine.vcxproj">
