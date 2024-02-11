@@ -16,6 +16,8 @@
 #include "FPSCameraComponent.h"
 #include "ModelComponent.h"
 #include "MeshComponent.h"
+#include "RigidBodyComponent.h"
+#include "ColliderComponent.h"
 
 //Service
 #include "Service.h"

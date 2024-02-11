@@ -23,11 +23,11 @@ void RigidBody::Initialize(WNTRengine::Graphics::Transform& graphicsTransform, c
 	mMotionState = new btDefaultMotionState(ConvertTobtTransform(graphicsTransform));
 	mRigidBody = new btRigidBody(mMass, mMotionState, shape.GetCollisionShape());
 	
-	PhysicsWorld::Get()->Register(this);
+	//PhysicsWorld::Get()->Register(this);
 }
 void RigidBody::Terminate()
 {
-	PhysicsWorld::Get()->Unregister(this);
+	//PhysicsWorld::Get()->Unregister(this);
 	SafeDelete(mMotionState);
 	SafeDelete(mRigidBody);
 	mGraphicsTransform = nullptr;

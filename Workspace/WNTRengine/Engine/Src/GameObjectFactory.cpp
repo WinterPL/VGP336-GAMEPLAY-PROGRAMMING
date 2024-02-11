@@ -7,10 +7,23 @@
 #include "FPSCameraComponent.h"
 #include "ModelComponent.h"
 #include "MeshComponent.h"
+#include "RigidBodyComponent.h"
+#include "ColliderComponent.h"
 
 using namespace WNTRengine;
 
 namespace rj = rapidjson;
+
+namespace {
+	CustomMake TryMake;
+}
+
+void GameObjectFactory::SetCustomMake(CustomMake customMake) 
+{
+	TryMake = customMake;
+
+}
+
 
 void GameObjectFactory::Make(const std::filesystem::path& templatePath, GameObject& gameObject)
 {
@@ -28,7 +41,11 @@ void GameObjectFactory::Make(const std::filesystem::path& templatePath, GameObje
 	for (auto& component : components)
 	{
 		const char* componentName = component.name.GetString();
-		if (strcmp(componentName, "TrasnformComponent") == 0)
+		if (TryMake(componentName, component.value, gameObject))
+		{
+			// it is custom and we handle on the project
+		}
+		else if (strcmp(componentName, "TrasnformComponent") == 0)
 		{
 			TransformComponent* transformComponent = gameObject.AddComponent<TransformComponent>();
 			transformComponent->DeSerialize(component.value);
@@ -52,6 +69,16 @@ void GameObjectFactory::Make(const std::filesystem::path& templatePath, GameObje
 		{
 			MeshComponent* meshComponent = gameObject.AddComponent<MeshComponent>();
 			meshComponent->DeSerialize(component.value);
+		}
+		else if (strcmp(componentName, "RigidBodyComponent") == 0)
+		{
+			RigidBodyComponent* rigidBodyComponent = gameObject.AddComponent<RigidBodyComponent>();
+			rigidBodyComponent->DeSerialize(component.value);
+		}
+		else if (strcmp(componentName, "ColliderComponent") == 0)
+		{
+			ColliderComponent* colliderComponent = gameObject.AddComponent<ColliderComponent>();
+			colliderComponent->DeSerialize(component.value);
 		}
 		else 
 		{

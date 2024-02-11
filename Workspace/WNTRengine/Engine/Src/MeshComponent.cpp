@@ -48,14 +48,14 @@ void MeshComponent::DeSerialize(rapidjson::Value& value)
 			}
 			else
 			{
-				ASSERT(false,"Shape: %s Shape is invalid",shapeType);
+				ASSERT(false, "Shape: %s Shape is invalid", shapeType);
 			}
 		}
 	}
 
 	if (value.HasMember("Material"))
 	{
-		const auto& materialData = value["MaterialData"].GetObj();
+		const auto& materialData = value["Material"].GetObj();
 		if (materialData.HasMember("ColorAmbient"))
 		{
 			const auto& color = materialData["ColorAmbient"].GetArray();
@@ -91,13 +91,11 @@ void MeshComponent::DeSerialize(rapidjson::Value& value)
 		if (materialData.HasMember("SpecularPower"))
 		{
 			material.material.power = materialData["SpecularPower"].GetFloat();
-
 		}
 	}
 
 	if (value.HasMember("Textures"))
 	{
-	
 		const auto& textureData = value["Textures"].GetObj();
 		if (textureData.HasMember("DiffuseMap"))
 		{

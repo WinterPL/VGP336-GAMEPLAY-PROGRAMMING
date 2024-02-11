@@ -5,10 +5,22 @@
 #include "CameraService.h"
 #include "UpdateService.h"
 #include "RenderService.h"
+#include "PhysicsService.h"
 
 #include "TransformComponent.h"
+#include "RigidBodyComponent.h"
 
 using namespace WNTRengine;
+
+namespace {
+	CustomService TryServiceMake;
+}
+
+void GameWorld::SetCustomServiceMake(CustomService customService)
+{
+	TryServiceMake = customService;
+}
+
 
 void GameWorld::Initialize(uint32_t capacity)
 {
@@ -134,7 +146,12 @@ void GameWorld::loadLevel(const std::filesystem::path& levelFile)
 	for (auto& service : services)
 	{
 		const char* serviceName = service.name.GetString();
-		if (strcmp(serviceName, "CameraService") == 0)
+
+		if (TryServiceMake(serviceName, service.value, *this))
+		{
+			//Custom Service, Project will handle
+		}
+		else if (strcmp(serviceName, "CameraService") == 0)
 		{
 			CameraService* cameraService = AddService<CameraService>();
 			cameraService->DeSerialize(service.value);
@@ -146,8 +163,13 @@ void GameWorld::loadLevel(const std::filesystem::path& levelFile)
 		}
 		else if (strcmp(serviceName, "RenderService") == 0)
 		{
-			RenderService* renderService = AddService<RenderService >();
+			RenderService* renderService = AddService<RenderService>();
 			renderService->DeSerialize(service.value);
+		}
+		else if (strcmp(serviceName, "PhysicsService") == 0)
+		{
+			PhysicsService* physicsService = AddService<PhysicsService>();
+			physicsService->DeSerialize(service.value);
 		}
 		else
 		{
@@ -176,6 +198,12 @@ void GameWorld::loadLevel(const std::filesystem::path& levelFile)
 
 				TransformComponent* transformComponent = obj->GetComponent<TransformComponent>();
 				transformComponent->position = { x,y,z };
+
+				RigidBodyComponent* rigidBodyComponent = obj->GetComponent<RigidBodyComponent>();
+				if (rigidBodyComponent != nullptr)
+				{
+					rigidBodyComponent->SetPosition(transformComponent->position);
+				}
 			}
 		}
 	}

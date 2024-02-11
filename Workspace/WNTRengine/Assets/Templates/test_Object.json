@@ -7,6 +7,16 @@
     },
     "ModelComponent": {
       "FileName": "../../Assets/Models/Character/Character.model"
+    },
+    "ColliderComponent": {
+      "Shape": {
+        "Type": "Hull",
+        "HalfExtents": [ 1.0, 0.85, 0.2 ],
+        "Origin": [ 0.0, 1.0, 0.0 ]
+      }
+    },
+    "RigidBodyComponent": {
+      "Mass": 1.0
     }
   }
 }

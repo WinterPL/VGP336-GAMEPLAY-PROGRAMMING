@@ -66,7 +66,7 @@ void PhysicsWorld::Terminate()
 void PhysicsWorld::Update(float deltaTime)
 {
 	mDynamicWorld->stepSimulation(deltaTime, mSettings.simulationSteps, mSettings.fixedTimeStep);
-	mSoftBodyWorld->stepSimulation(deltaTime, mSettings.simulationSteps, mSettings.fixedTimeStep);
+	//mSoftBodyWorld->stepSimulation(deltaTime, mSettings.simulationSteps, mSettings.fixedTimeStep);
 
 	for (auto po : mPhysicsObjects)
 	{
@@ -96,6 +96,30 @@ void PhysicsWorld::DebugUI()
 		mSoftBodyWorld->debugDrawWorld();
 	}
 }
+
+void PhysicsWorld::SetGravity(const WNTRmath::Vector3& gravity)
+{
+	mSettings.gravity = gravity;
+	if (mDynamicWorld != nullptr)
+	{
+		mDynamicWorld->setGravity(gravity);
+	}
+	if (mSoftBodyWorld != nullptr)
+	{
+		mSoftBodyWorld->setGravity(gravity);
+	}
+}
+
+void PhysicsWorld::SetSimulationSteps(uint32_t steps)
+{
+	mSettings.simulationSteps = steps;
+}
+
+void PhysicsWorld::SetFixedTimeStep(float timeStep)
+{
+	mSettings.fixedTimeStep = timeStep;
+}
+
 
 void PhysicsWorld::Register(PhysicsObject* physicsObject)
 {

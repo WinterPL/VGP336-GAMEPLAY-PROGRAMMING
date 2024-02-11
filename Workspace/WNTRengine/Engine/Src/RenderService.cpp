@@ -57,6 +57,8 @@ void  RenderService::Render()
 		DrawRenderGroup(mStandardEffect, entry.renderGroup);
 	}
 	mStandardEffect.End();
+
+
 }
 void  RenderService::DebugUI()
 {

@@ -12,6 +12,8 @@ namespace WNTRengine
 		FPSCamera,
 		Model,
 		Mesh,
+		RigidBody,
+		Collider,
 
 		Count
 	};
@@ -22,6 +24,7 @@ namespace WNTRengine
 		Camera,
 		Update,
 		Render,
+		Physics,
 
 		Count
 	};

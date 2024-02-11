@@ -27,6 +27,10 @@ namespace WNTRengine::Physics
 		void Update(float deltaTime);
 		void DebugUI();
 
+		void SetGravity(const WNTRmath::Vector3& gravity);
+		void SetSimulationSteps(uint32_t steps);
+		void SetFixedTimeStep(float timeStep);
+
 		void Register(PhysicsObject* physicsObject);
 		void Unregister(PhysicsObject* physicsObject);
 

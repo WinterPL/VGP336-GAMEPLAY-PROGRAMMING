@@ -72,7 +72,7 @@ void App::Run(const AppConfig& config)
 		auto deltaTime = TimeUtil::GetDeltaTime();
 		if (deltaTime < 0.5f)
 		{
-			PhysicsWorld::Get()->Update(deltaTime);
+			//PhysicsWorld::Get()->Update(deltaTime);
 			mCurrentState->Update(deltaTime);
 		}
 
@@ -93,7 +93,6 @@ void App::Run(const AppConfig& config)
 	DebugUI::StaticTerminate();
 	InputSystem::StaticTerminate();
 	GraphicsSystem::StaticTerminate();
-
 	myWindow.Terminate();
 }
 
