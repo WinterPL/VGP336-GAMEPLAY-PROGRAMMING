@@ -18,6 +18,8 @@
 #include "MeshComponent.h"
 #include "RigidBodyComponent.h"
 #include "ColliderComponent.h"
+#include "SoundEffectComponent.h"
+#include "SoundBankComponent.h"
 
 //Service
 #include "Service.h"

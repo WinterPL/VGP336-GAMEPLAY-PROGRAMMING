@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "Component.h"
 
 namespace WNTRengine
@@ -13,7 +12,7 @@ namespace WNTRengine
 		void Initialize() override;
 		void Terminate() override;
 
-		void DeSerialize(rapidjson::Value& value) override;
+		void DeSerialize(const rapidjson::Value& value) override;
 
 		Graphics::ModelId GetModelId() const { return mModelId; }
 		const Graphics::Model& GetModel() const
@@ -25,6 +24,9 @@ namespace WNTRengine
 	private:
 		std::string mFileName;
 		Graphics::ModelId  mModelId;
+
+		using Animations = std::vector<std::string>;
+		Animations mAnimationFileNames;
 	};
 
 }

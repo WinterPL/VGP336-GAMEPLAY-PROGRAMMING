@@ -8,7 +8,7 @@ void TransformComponent::DebugUI()
 	Graphics::SimpleDraw::AddTransform(GetMatrix4());
 }
 
-void TransformComponent::DeSerialize(rapidjson::Value& value)
+void TransformComponent::DeSerialize(const rapidjson::Value& value)
 {
 	if (value.HasMember("Position"))
 	{

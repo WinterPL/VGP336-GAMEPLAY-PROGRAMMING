@@ -31,8 +31,10 @@ void GameObject::Terminate()
 
 void GameObject::DebugUI()
 {
-	for (auto& Component : mComponents)
-	{
-		Component->DebugUI();
+	if (ImGui::CollapsingHeader(mName.c_str())) {
+		for (auto& Component : mComponents)
+		{
+			Component->DebugUI();
+		}
 	}
 }

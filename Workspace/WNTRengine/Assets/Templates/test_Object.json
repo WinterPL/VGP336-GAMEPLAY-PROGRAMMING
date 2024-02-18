@@ -6,7 +6,16 @@
       "Scale": [ 1.0, 1.0, 1.0 ]
     },
     "ModelComponent": {
-      "FileName": "../../Assets/Models/Character/Character.model"
+      "FileName": "../../Assets/Models/Character/Character.model",
+      "Animations": [
+        "../../Assets/Models/Character/Character.animset",
+        "../../Assets/Models/Character/Walking.animset",
+        "../../Assets/Models/Character/Running.animset",
+        "../../Assets/Models/Character/walkback.animset"
+      ]
+    },
+    "AnimatorComponent": {
+
     },
     "ColliderComponent": {
       "Shape": {

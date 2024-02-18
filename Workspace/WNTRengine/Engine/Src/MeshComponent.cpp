@@ -17,7 +17,7 @@ void MeshComponent::Terminate()
 	RenderService* rs = GetOwner().GetWorld().GetService<RenderService>();
 	rs->Unregister(this);
 }
-void MeshComponent::DeSerialize(rapidjson::Value& value)
+void MeshComponent::DeSerialize(const rapidjson::Value& value)
 {
 	Model::MeshData& meshData = mModel.meshData.emplace_back();
 	Model::MaterialData& material = mModel.materialData.emplace_back();

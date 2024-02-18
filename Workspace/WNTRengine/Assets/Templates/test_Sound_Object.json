@@ -1,0 +1,19 @@
+{
+  "Components": {
+    "TrasnformComponent": {
+      "Position": [ 0.0, 0.0, 0.0 ],
+      "Rotation": [ 0.0, 0.0, 0.0, 1.0 ],
+      "Scale": [ 1.0, 1.0, 1.0 ]
+    },
+    "SoundBankComponent": {
+      "SoundEffects": {
+          "Explosion": {
+            "FileName": "explosion.wav"
+          },
+          "Shoot": {
+            "FileName": "megamanx_shot.wav"
+          }
+      }
+    }
+  }
+}

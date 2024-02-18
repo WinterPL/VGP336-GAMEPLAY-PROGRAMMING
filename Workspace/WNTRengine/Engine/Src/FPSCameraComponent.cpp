@@ -64,7 +64,7 @@ void FPSCameraComponent::Update(float deltaTime)
 
 }
 
-void FPSCameraComponent::DeSerialize(rapidjson::Value& value)
+void FPSCameraComponent::DeSerialize(const rapidjson::Value& value)
 {
     if (value.HasMember("MoveSpeed"))
     {

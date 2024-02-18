@@ -15,7 +15,7 @@ namespace WNTRengine
 		void Initialize() override;
 		void Terminate() override;
 		void Update(float deltaTime) override;
-		void DeSerialize(rapidjson::Value& value) override;
+		void DeSerialize(const rapidjson::Value& value) override;
 
 	private:
 		TransformComponent* mTransformComponent = nullptr;

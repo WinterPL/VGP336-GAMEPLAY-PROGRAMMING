@@ -14,6 +14,8 @@ namespace WNTRengine
 		Mesh,
 		RigidBody,
 		Collider,
+		SoundEffect,
+		Animator,
 
 		Count
 	};

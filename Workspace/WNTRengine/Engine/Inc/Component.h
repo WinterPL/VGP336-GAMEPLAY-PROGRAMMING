@@ -28,7 +28,7 @@ namespace WNTRengine
 
 		//Serialize and deserialize
 		virtual void Serialize(rapidjson::Document& doc, rapidjson::Value& value) {}
-		virtual void DeSerialize(rapidjson::Value& value) {}
+		virtual void DeSerialize(const rapidjson::Value& value) {}
 
 	private:
 		friend class GameObject;

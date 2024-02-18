@@ -9,6 +9,7 @@ using namespace WNTRengine::Core;
 using namespace WNTRengine::Input;
 using namespace WNTRengine::Graphics;
 using namespace WNTRengine::Physics;
+using namespace WNTRengine::Audio;
 
 void App::ChangeState(const std::string& stateName)
 {
@@ -41,6 +42,8 @@ void App::Run(const AppConfig& config)
 	SimpleDraw::StaticInitialize(config.debugDrawLimit);
 	TextureManager::StaticInitialize("../../Assets/Textures/");
 	ModelManager::StaticInitialize();
+	AudioSystem::StaticInitialize();
+	SoundEffectManager::StaticInitialize("../../Assets/Audio/");
 
 	PhysicsWorld::Settings settings;
 	PhysicsWorld::StaticInitialize(settings);
@@ -68,6 +71,7 @@ void App::Run(const AppConfig& config)
 			mCurrentState->Initialize();
 		}
 		
+	AudioSystem::Get()->Update();
 		//run the game
 		auto deltaTime = TimeUtil::GetDeltaTime();
 		if (deltaTime < 0.5f)
@@ -86,6 +90,8 @@ void App::Run(const AppConfig& config)
 	}
 
 	//terminate static classes
+	SoundEffectManager::StaticTerminate();
+	AudioSystem::StaticTerminate();
 	PhysicsWorld::Staticterminate();
 	ModelManager::StaticTerminate();
 	TextureManager::StaticTerminate();

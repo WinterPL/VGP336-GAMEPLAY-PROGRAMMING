@@ -11,7 +11,7 @@ namespace WNTRengine
 
 		void Initialize() override;
 		void Terminate() override;
-		void DeSerialize(rapidjson::Value& value) override;
+		void DeSerialize(const rapidjson::Value& value) override;
 
 		const Graphics::Model& GetModel() const { return mModel; }
 

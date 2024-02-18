@@ -9,6 +9,9 @@
 #include "MeshComponent.h"
 #include "RigidBodyComponent.h"
 #include "ColliderComponent.h"
+#include "SoundEffectComponent.h"
+#include "SoundBankComponent.h"
+#include "AnimatorComponent.h"
 
 using namespace WNTRengine;
 
@@ -79,6 +82,21 @@ void GameObjectFactory::Make(const std::filesystem::path& templatePath, GameObje
 		{
 			ColliderComponent* colliderComponent = gameObject.AddComponent<ColliderComponent>();
 			colliderComponent->DeSerialize(component.value);
+		}
+		else if (strcmp(componentName, "SoundEffectComponent") == 0)
+		{
+			SoundEffectComponent* soundEffectComponent = gameObject.AddComponent<SoundEffectComponent>();
+			soundEffectComponent->DeSerialize(component.value);
+		}
+		else if (strcmp(componentName, "SoundBankComponent") == 0)
+		{
+			SoundBankComponent* soundBankComponent = gameObject.AddComponent<SoundBankComponent>();
+			soundBankComponent->DeSerialize(component.value);
+		}
+		else if (strcmp(componentName, "AnimatorComponent") == 0)
+		{
+			AnimatorComponent* animatorComponent = gameObject.AddComponent<AnimatorComponent>();
+			animatorComponent->DeSerialize(component.value);
 		}
 		else 
 		{

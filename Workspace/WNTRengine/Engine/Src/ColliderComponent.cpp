@@ -15,7 +15,7 @@ void ColliderComponent::Terminate()
 }
 
 
-void ColliderComponent::DeSerialize(rapidjson::Value& value)
+void ColliderComponent::DeSerialize(const rapidjson::Value& value)
 {
 	if (value.HasMember("Shape"))
 	{
