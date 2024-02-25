@@ -1,11 +1,14 @@
 #include "Precompiled.h"
 #include "ShadowEffect.h"
 
+#include "RenderObject.h"
+#include "VertexTypes.h"
+#include "AnimationUtil.h"
+
 using namespace WNTRengine;
 using namespace WNTRengine::Graphics;
 
-#include "RenderObject.h"
-#include "VertexTypes.h"
+static constexpr size_t MaxBoneCount = 256;
 
 void ShadowEffect::Initialize()
 {
@@ -16,6 +19,7 @@ void ShadowEffect::Initialize()
 	mPixelShader.Initialize(shaderFile);
 
 	mTransformBuffer.Initialize();
+	mBoneTransform.Initialize(MaxBoneCount * sizeof(WNTRengine::WNTRmath::Matrix4));
 
 	constexpr uint32_t depthMapResolution = 4096;
 	mDepthMapRenderTarget.Initialize(depthMapResolution, depthMapResolution, Texture::Format::RGBA_U32);
@@ -27,6 +31,7 @@ void ShadowEffect::Terminate()
 	mTransformBuffer.Terminate();
 	mPixelShader.Terminate();
 	mVertexShader.Terminate();
+	mBoneTransform.Terminate();
 }
 
 void ShadowEffect::Begin()
@@ -36,6 +41,7 @@ void ShadowEffect::Begin()
 	mVertexShader.Bind();
 	mPixelShader.Bind();
 	mTransformBuffer.BindVS(0);
+	mBoneTransform.BindVS(1);
 
 	mDepthMapRenderTarget.BeginRender();
 }
@@ -54,6 +60,19 @@ void ShadowEffect::Render(const RenderObject& renderObject)
 	TransformData data;
 	data.wvp = WNTRmath::Transpose(matWorld * matView * matproj);
 	mTransformBuffer.Update(data);
+
+	if (renderObject.skeleton != nullptr)
+	{
+		AnimationUtil::BoneTransforms boneTransforms;
+		AnimationUtil::ComputeBoneTransform(renderObject.modelId, boneTransforms,renderObject.animator);
+		AnimationUtil::ApplyBoneOffsets(renderObject.modelId, boneTransforms);
+		for (WNTRmath::Matrix4& transform : boneTransforms)
+		{
+			transform = WNTRmath::Transpose(transform);
+		}
+		boneTransforms.resize(MaxBoneCount);
+		mBoneTransform.Update(boneTransforms.data());
+	}
 
 	renderObject.meshBuffer.Render();
 

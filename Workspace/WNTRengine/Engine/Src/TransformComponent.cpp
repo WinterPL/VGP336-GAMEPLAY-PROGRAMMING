@@ -1,11 +1,21 @@
 #include "Precompiled.h"
 #include "TransformComponent.h"
+#include "SaveUtil.h"
 
 using namespace WNTRengine;
 
 void TransformComponent::DebugUI()
 {
 	Graphics::SimpleDraw::AddTransform(GetMatrix4());
+}
+
+void TransformComponent::Serialize(rapidjson::Document& doc, rapidjson::Value& value)
+{
+	rapidjson::Value componentValue(rapidjson::kObjectType);
+	SaveUtil::SaveVetor3("Position", position, doc, componentValue);
+	SaveUtil::SaveQuaternion("Rotation", rotation, doc, componentValue);
+	SaveUtil::SaveVetor3("Scale", scale, doc, componentValue);
+	value.AddMember("TransformComponent", componentValue, doc.GetAllocator());
 }
 
 void TransformComponent::DeSerialize(const rapidjson::Value& value)

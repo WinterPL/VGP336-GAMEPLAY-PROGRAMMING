@@ -10,6 +10,8 @@
 #include "TransformComponent.h"
 #include "RigidBodyComponent.h"
 
+#include "WNTRengine.h"
+
 using namespace WNTRengine;
 
 namespace {
@@ -53,6 +55,7 @@ void GameWorld::Terminate()
 	for (auto& service : mServices) {
 		service->Terminate();
 	}
+	mServices.clear();
 	mInitialized = false;
 }
 
@@ -70,10 +73,6 @@ void GameWorld::Render()
 }
 void GameWorld::DebugUI()
 {
-	for (auto& service : mServices) {
-		service->DebugUI();
-	}
-
 	for (auto& slot : mGameObjectSlots) {
 		if (slot.gameObject != nullptr)
 		{
@@ -81,7 +80,39 @@ void GameWorld::DebugUI()
 		}
 	}
 
+	for (auto& service : mServices) {
+		service->DebugUI();
+	}
+
+	if (ImGui::Button("Edit##GameWorld"))
+	{
+		MainApp().ChangeState("EditorState");
+	}
+
+
+
 }
+
+void GameWorld::EditorUI()
+{
+	for (auto& slot : mGameObjectSlots) {
+		if (slot.gameObject != nullptr)
+		{
+			slot.gameObject->EditorUI();
+		}
+	}
+
+	if (ImGui::Button("SaveWorld##GameWorld"))
+	{
+		SaveLevel(mLevelFile);
+	}
+	ImGui::SameLine();
+	if (ImGui::Button("Exit##GameWorld"))
+	{
+		MainApp().ChangeState("GameState");
+	}
+}
+
 
 GameObject* GameWorld::CreateGameObject(const std::filesystem::path& templateFile)
 {
@@ -131,6 +162,7 @@ void GameWorld::DestroyGameObject(const GameObjectHandle& handle)
 
 void GameWorld::loadLevel(const std::filesystem::path& levelFile)
 {
+	mLevelFile = levelFile;
 	FILE* file = nullptr;
 	auto err = fopen_s(&file, levelFile.u8string().c_str(), "r");
 	ASSERT(err == 0 && file != nullptr, "GameWorld: failed to load level %s", levelFile.u8string().c_str());
@@ -207,6 +239,32 @@ void GameWorld::loadLevel(const std::filesystem::path& levelFile)
 			}
 		}
 	}
+
+}
+
+void GameWorld::SaveLevel(const std::filesystem::path& levelFile)
+{
+
+}
+void GameWorld::SaveTemplate(const std::filesystem::path& templateFile, const GameObjectHandle& handle)
+{
+	GameObject* go = GetGameObject(handle);
+	if (go != nullptr)
+	{
+		rapidjson::Document doc;
+		go->Serialize(doc);
+
+		FILE* file = nullptr;
+		auto err = fopen_s(&file, templateFile.u8string().c_str(), "w");
+		ASSERT(err == 0 && file != nullptr, "GameWorld: SaveTemplate failed to open level %s", templateFile.string());
+
+		char writeBuffer[65536];
+		rapidjson::FileWriteStream writeStream(file, writeBuffer, sizeof(writeBuffer));
+		rapidjson::PrettyWriter<rapidjson::FileWriteStream> writer(writeStream);
+		doc.Accept(writer);
+		fclose(file);
+	}
+	
 
 }
 

@@ -21,7 +21,8 @@
       },
       "Textures": {
         "DiffuseMap": "../../Assets/textures/misc/concrete.jpg"
-      }
+      },
+      "CastShadow": false
     },
     "ColliderComponent": {
       "Shape": {

@@ -44,6 +44,7 @@ namespace WNTRengine
 			const ModelComponent* modelComponent = nullptr;
 			const TransformComponent* transformComponent = nullptr;
 			Graphics::RenderGroup renderGroup;
+			bool castShadow = true;
 		};
 		using RenderEntities = std::vector<Entry>;
 		RenderEntities mRenderEntries;

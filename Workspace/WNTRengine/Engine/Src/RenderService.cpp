@@ -48,7 +48,10 @@ void  RenderService::Render()
 	mShadowEffect.Begin();
 	for (const Entry& entry : mRenderEntries)
 	{
-		DrawRenderGroup(mShadowEffect, entry.renderGroup);
+		if(entry.castShadow)
+		{
+			DrawRenderGroup(mShadowEffect, entry.renderGroup);
+		}
 	}
 	mShadowEffect.End();
 
@@ -61,6 +64,7 @@ void  RenderService::Render()
 
 
 }
+
 void  RenderService::DebugUI()
 {
 	ImGui::Text("FPS: %f", mFPS);
@@ -156,6 +160,7 @@ void RenderService::Register(const MeshComponent* meshComponent)
 	const GameObject& gameObject = meshComponent->GetOwner();
 	entry.meshComponent = meshComponent;
 	entry.transformComponent = gameObject.GetComponent<TransformComponent>();
+	entry.castShadow = meshComponent->CastShadow();
 	entry.renderGroup = CreateRenderGroup(meshComponent->GetModel());
 }
 void RenderService::Unregister(const MeshComponent* meshComponent)

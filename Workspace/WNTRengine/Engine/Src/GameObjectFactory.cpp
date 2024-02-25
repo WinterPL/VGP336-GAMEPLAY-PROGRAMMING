@@ -24,7 +24,6 @@ namespace {
 void GameObjectFactory::SetCustomMake(CustomMake customMake) 
 {
 	TryMake = customMake;
-
 }
 
 
@@ -37,6 +36,8 @@ void GameObjectFactory::Make(const std::filesystem::path& templatePath, GameObje
 	char readBuffer[65536];
 	rj::FileReadStream readStream(file, readBuffer, sizeof(readBuffer));
 	fclose(file);
+
+	gameObject.SetTemplate(templatePath);
 
 	rj::Document doc;
 	doc.ParseStream(readStream);

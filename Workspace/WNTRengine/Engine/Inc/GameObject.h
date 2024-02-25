@@ -13,10 +13,14 @@ namespace WNTRengine
 		void Initialize();
 		void Terminate();
 		void DebugUI();
+		void EditorUI();
 
 		void SetName(const std::string& name) {mName = std::move(name);}
 		const std::string& GetName() const { return mName; }
 		uint32_t GetUniqueId() const { return mUniqueId; }
+
+		void SetTemplate(const std::filesystem::path& templatePath) { mTemplatePath = templatePath; }
+		const std::filesystem::path& GetTemplatePath() const { return mTemplatePath; }
 
 		GameWorld& GetWorld(){ return *mWorld; }
 		const GameWorld& GetWorld() const{ return *mWorld; }
@@ -80,12 +84,15 @@ namespace WNTRengine
 			return nullptr;
 		}
 
+		void Serialize(rapidjson::Document& doc);
+
 
 	private:
 		friend class GameWorld;
 		GameWorld* mWorld = nullptr;
 		GameObjectHandle mHandle;
 
+		std::filesystem::path mTemplatePath;
 		std::string mName = "EMPTY";
 		bool mInitialized = false;
 		uint32_t mUniqueId = 0;

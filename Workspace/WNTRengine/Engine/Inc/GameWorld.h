@@ -17,12 +17,15 @@ namespace WNTRengine
 		void Update(float deltaTime);
 		void Render();
 		void DebugUI();
+		void EditorUI();
 
 		GameObject* CreateGameObject(const std::filesystem::path& templateFile);
 		GameObject* GetGameObject(const GameObjectHandle& handle);
 		void DestroyGameObject(const GameObjectHandle& handle);
 
 		void loadLevel(const std::filesystem::path& levelFile);
+		void SaveLevel(const std::filesystem::path& levelFile);
+		void SaveTemplate(const std::filesystem::path& templateFile, const GameObjectHandle& handle);
 
 		template<class ServiceType>
 		ServiceType* AddService() 
@@ -74,6 +77,7 @@ namespace WNTRengine
 
 		Services mServices;
 
+		std::filesystem::path mLevelFile;
 		GameObjectSlots mGameObjectSlots;
 		std::vector<uint32_t> mFreeSlots;
 		std::vector<uint32_t> mToBeDestroyed;

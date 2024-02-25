@@ -21,6 +21,7 @@ namespace WNTRengine
 		virtual void Terminate() {}
 		virtual void Update(float deltaTime) {}
 		virtual void DebugUI() {}
+		virtual void EditorUI() {}
 
 		virtual uint32_t GetTypeId() const = 0;
 		GameObject& GetOwner() { return *mOwner; }

@@ -3,6 +3,7 @@
 
 #include "GameWorld.h"
 #include "RenderService.h"
+#include "SaveUtil.h"
 
 using namespace WNTRengine;
 using namespace WNTRengine::Graphics;
@@ -28,6 +29,16 @@ void ModelComponent::Terminate()
 {
 	RenderService* rs = GetOwner().GetWorld().GetService<RenderService>();
 	rs->Unregister(this);
+}
+
+
+void ModelComponent::Serialize(rapidjson::Document& doc, rapidjson::Value& value)
+{
+	rapidjson::Value componentValue(rapidjson::kObjectType);
+	SaveUtil::SaveString("FileName", mFileName.c_str(), doc, componentValue);
+	SaveUtil::SaveBool("CastShadow", mCastShadow, doc, componentValue);
+	SaveUtil::SaveStringArray("Animations", mAnimationFileNames , doc, componentValue);
+	value.AddMember("ModelComponent", componentValue, doc.GetAllocator());
 }
 
 void ModelComponent::DeSerialize(const rapidjson::Value& value)

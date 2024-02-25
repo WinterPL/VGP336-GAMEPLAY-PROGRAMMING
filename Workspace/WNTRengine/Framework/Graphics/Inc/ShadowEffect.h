@@ -39,7 +39,10 @@ namespace WNTRengine::Graphics
 		};
 
 		using TransformBuffer = TypedConstantBuffer<TransformData>;
+		using BoneTransformBuffer = ConstantBuffer;
+
 		TransformBuffer mTransformBuffer;
+		BoneTransformBuffer mBoneTransform;
 
 		VertexShader mVertexShader;
 		PixelShader mPixelShader;
