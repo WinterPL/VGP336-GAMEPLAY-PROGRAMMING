@@ -12,8 +12,8 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE, LPSTR, int)
 
 	App& myApp = MainApp();
 	myApp.AddState<GameState>("GameState");
-	myApp.AddState<GameState>("EditorState");
-	myApp.AddState<GameState>("EditTemplateState");
+	myApp.AddState<EditorState>("EditorState");
+	myApp.AddState<EditTemplateState>("EditTemplateState");
 	myApp.Run(config);
 
 	return (0);

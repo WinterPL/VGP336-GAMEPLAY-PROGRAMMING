@@ -45,3 +45,8 @@ void  PhysicsService::Unregister(RigidBodyComponent& rigidBodyComponent)
 {
 	PhysicsWorld::Get()->Unregister(&rigidBodyComponent.mRigidBody);
 }
+
+void PhysicsService::SetEnabled(bool enabled)
+{
+	PhysicsWorld::Get()->SetEnable(enabled);
+}

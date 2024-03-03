@@ -5,10 +5,13 @@
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="EditTemplateState.cpp" />
     <ClCompile Include="EditorState.cpp" />
+    <ClCompile Include="CustomFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameState.h" />
     <ClInclude Include="EditTemplateState.h" />
     <ClInclude Include="EditorState.h" />
+    <ClInclude Include="TypeIds.h" />
+    <ClInclude Include="CustomFactory.h" />
   </ItemGroup>
 </Project>

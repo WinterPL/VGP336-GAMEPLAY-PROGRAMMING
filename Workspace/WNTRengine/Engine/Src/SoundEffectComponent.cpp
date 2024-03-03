@@ -1,5 +1,6 @@
 #include "Precompiled.h"
 #include "SoundEffectComponent.h"
+#include "SaveUtil.h"
 
 #include "GameWorld.h"
 
@@ -16,6 +17,15 @@ void SoundEffectComponent::Terminate()
 {
 	//should probably remove audio effect
 }
+
+void SoundEffectComponent::Serialize(rapidjson::Document& doc, rapidjson::Value& value)
+{
+	rapidjson::Value componentValue(rapidjson::kObjectType);
+	SaveUtil::SaveString("FileName", mFileName.c_str(), doc, componentValue);
+	SaveUtil::SaveBool("Looping", mLooping, doc, componentValue);
+	value.AddMember("SoundEffectComponent", componentValue, doc.GetAllocator());
+}
+
 void SoundEffectComponent::DeSerialize(const rapidjson::Value& value)
 {
 	if (value.HasMember("FileName"))

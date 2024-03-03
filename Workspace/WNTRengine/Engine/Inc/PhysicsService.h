@@ -20,6 +20,7 @@ namespace WNTRengine
 		void Register(RigidBodyComponent& rigidBodyComponent);
 		void Unregister(RigidBodyComponent& rigidBodyComponent);
 
+		void SetEnabled(bool enabled);
 	private:
 		
 	};

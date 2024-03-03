@@ -27,6 +27,7 @@ namespace WNTRengine::Physics
 		void Update(float deltaTime);
 		void DebugUI();
 
+		void SetEnable(bool enabled);
 		void SetGravity(const WNTRmath::Vector3& gravity);
 		void SetSimulationSteps(uint32_t steps);
 		void SetFixedTimeStep(float timeStep);
@@ -37,6 +38,7 @@ namespace WNTRengine::Physics
 	private:
 		Settings mSettings;
 		bool mRenderDebugUI = false;
+		bool mEnabled = true;
 
 		PhysicsDebugDrawer mDebugDrawer;
 		//bullet objects

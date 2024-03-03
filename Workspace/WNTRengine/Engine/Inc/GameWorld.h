@@ -10,6 +10,8 @@ namespace WNTRengine
 	{
 	public:
 		static void SetCustomServiceMake(CustomService customService);
+		static void SetEditObject(const std::string& objectName);
+		static const std::string& GetEditObject();
 
 		void Initialize(uint32_t capacity);
 		void Terminate();
@@ -21,11 +23,13 @@ namespace WNTRengine
 
 		GameObject* CreateGameObject(const std::filesystem::path& templateFile);
 		GameObject* GetGameObject(const GameObjectHandle& handle);
+		GameObject* GetGameObject(const std::string& name);
 		void DestroyGameObject(const GameObjectHandle& handle);
 
 		void loadLevel(const std::filesystem::path& levelFile);
 		void SaveLevel(const std::filesystem::path& levelFile);
 		void SaveTemplate(const std::filesystem::path& templateFile, const GameObjectHandle& handle);
+		const std::filesystem::path& GetLevelFile() const { return mLevelFile; }
 
 		template<class ServiceType>
 		ServiceType* AddService() 

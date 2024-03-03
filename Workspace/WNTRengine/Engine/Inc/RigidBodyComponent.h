@@ -12,6 +12,7 @@ namespace WNTRengine
 		void Initialize() override;
 		void Terminate() override;
 
+		void Serialize(rapidjson::Document& doc, rapidjson::Value& value) override;
 		void DeSerialize(const rapidjson::Value& value) override;
 
 		void SetPosition(const WNTRengine::WNTRmath::Vector3& position);

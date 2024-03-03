@@ -4,7 +4,8 @@ namespace WNTRengine
 {
 	namespace SaveUtil
 	{
-		void SaveVetor3     (const char* key, const WNTRmath::Vector3& v, rapidjson::Document& doc, rapidjson::Value& member);
+		void SaveVector3     (const char* key, const WNTRmath::Vector3& v, rapidjson::Document& doc, rapidjson::Value& member);
+		void SaveColor     (const char* key, const Color& c, rapidjson::Document& doc, rapidjson::Value& member);
 		void SaveQuaternion (const char* key, const WNTRmath::Quaternion& q, rapidjson::Document& doc, rapidjson::Value& member);
 		void SaveFloat      (const char* key, float value, rapidjson::Document& doc, rapidjson::Value& member);
 		void SaveInt        (const char* key, int value, rapidjson::Document& doc, rapidjson::Value& member);

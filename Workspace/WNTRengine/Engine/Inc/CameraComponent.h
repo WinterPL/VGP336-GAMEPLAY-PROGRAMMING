@@ -12,6 +12,7 @@ namespace WNTRengine
 		void Initialize() override;
 		void Terminate() override;
 
+		void Serialize(rapidjson::Document& doc, rapidjson::Value& value) override;
 		void DeSerialize(const rapidjson::Value& value) override;
 
 		Graphics::Camera& GetCamera() { return mCamera; }
@@ -19,6 +20,8 @@ namespace WNTRengine
 
 	private:
 		Graphics::Camera mCamera;
+		WNTRmath::Vector3 mStartingPosition = WNTRmath::Vector3::Zero;
+		WNTRmath::Vector3 mStartingLookAt = WNTRmath::Vector3::Zero;
 
 	};
 

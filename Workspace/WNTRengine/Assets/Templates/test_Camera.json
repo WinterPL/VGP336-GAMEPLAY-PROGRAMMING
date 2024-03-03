@@ -1,11 +1,11 @@
 {
   "Components": {
-      "TrasnformComponent": {
+    "TransformComponent": {
 
-      },
-      "CameraComponent": {
-         "Position": [ 0.0, 1.5, -4.0 ],
-         "LookAt": [ 0.0, 0.0, 0.0 ]
-      }
+    },
+    "CameraComponent": {
+      "Position": [ 0.0, 1.5, -4.0 ],
+      "LookAt": [ 0.0, 0.0, 0.0 ]
     }
+  }
   }

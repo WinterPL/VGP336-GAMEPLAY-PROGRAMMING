@@ -49,7 +49,7 @@ void GameObjectFactory::Make(const std::filesystem::path& templatePath, GameObje
 		{
 			// it is custom and we handle on the project
 		}
-		else if (strcmp(componentName, "TrasnformComponent") == 0)
+		else if (strcmp(componentName, "TransformComponent") == 0)
 		{
 			TransformComponent* transformComponent = gameObject.AddComponent<TransformComponent>();
 			transformComponent->DeSerialize(component.value);

@@ -2,6 +2,7 @@
 #include "SoundBankComponent.h"
 
 #include "GameObject.h"
+#include "SaveUtil.h"
 
 using namespace WNTRengine;
 using namespace WNTRengine::Audio;
@@ -17,6 +18,20 @@ void SoundBankComponent::Initialize()
 void SoundBankComponent::Terminate()
 {
 
+}
+
+void SoundBankComponent::Serialize(rapidjson::Document& doc, rapidjson::Value& value)
+{
+	rapidjson::Value componentValue(rapidjson::kObjectType);
+	for (auto soundEffect : mSoundEffects)
+	{
+		rapidjson::Value soundEffectValue(rapidjson::kObjectType);
+		rapidjson::GenericStringRef<char> str(soundEffect.first.c_str());
+		SaveUtil::SaveString("FileName", soundEffect.second.fileName.c_str(), doc, soundEffectValue);
+		SaveUtil::SaveBool("Looping", soundEffect.second.isLooping, doc, soundEffectValue);
+		componentValue.AddMember(str, soundEffectValue, doc.GetAllocator());
+	}
+	value.AddMember("SoundBankComponent", componentValue, doc.GetAllocator());
 }
 
 void SoundBankComponent::DeSerialize(const rapidjson::Value& value)

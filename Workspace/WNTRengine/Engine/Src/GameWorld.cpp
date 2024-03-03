@@ -10,17 +10,27 @@
 #include "TransformComponent.h"
 #include "RigidBodyComponent.h"
 
-#include "WNTRengine.h"
 
 using namespace WNTRengine;
 
 namespace {
 	CustomService TryServiceMake;
+	std::string sEditTemplateName = "";
 }
 
 void GameWorld::SetCustomServiceMake(CustomService customService)
 {
 	TryServiceMake = customService;
+}
+
+void GameWorld::SetEditObject(const std::string& objectName)
+{
+	sEditTemplateName = objectName;
+}
+
+const std::string& WNTRengine::GameWorld::GetEditObject()
+{
+	return sEditTemplateName;
 }
 
 
@@ -83,14 +93,6 @@ void GameWorld::DebugUI()
 	for (auto& service : mServices) {
 		service->DebugUI();
 	}
-
-	if (ImGui::Button("Edit##GameWorld"))
-	{
-		MainApp().ChangeState("EditorState");
-	}
-
-
-
 }
 
 void GameWorld::EditorUI()
@@ -102,14 +104,9 @@ void GameWorld::EditorUI()
 		}
 	}
 
-	if (ImGui::Button("SaveWorld##GameWorld"))
+	for (auto& service : mServices)
 	{
-		SaveLevel(mLevelFile);
-	}
-	ImGui::SameLine();
-	if (ImGui::Button("Exit##GameWorld"))
-	{
-		MainApp().ChangeState("GameState");
+		service->DebugUI();
 	}
 }
 
@@ -148,6 +145,17 @@ GameObject* GameWorld::GetGameObject(const GameObjectHandle& handle)
 	}
 	return mGameObjectSlots[handle.mIndex].gameObject.get();
 }
+GameObject* WNTRengine::GameWorld::GetGameObject(const std::string& name)
+{
+	for (auto& slot : mGameObjectSlots) {
+		if (slot.gameObject != nullptr && slot.gameObject->GetName()==name)
+		{
+			return slot.gameObject.get();
+		}
+	}
+	return nullptr;
+}
+
 void GameWorld::DestroyGameObject(const GameObjectHandle& handle)
 {
 	if (!IsValid(handle))
@@ -214,6 +222,11 @@ void GameWorld::loadLevel(const std::filesystem::path& levelFile)
 	auto gameObjects = doc["GameObjects"].GetObj();
 	for (auto& gameObject : gameObjects)
 	{
+		std::string name = gameObject.name.GetString();
+		if (!sEditTemplateName.empty() && sEditTemplateName!=name &&name!="MainCamera")
+		{
+			continue;
+		}
 		const char* templateFile = gameObject.value["Template"].GetString();
 		GameObject* obj = CreateGameObject(templateFile);
 		if (obj != nullptr)
@@ -221,7 +234,7 @@ void GameWorld::loadLevel(const std::filesystem::path& levelFile)
 			const char* name = gameObject.name.GetString();
 			obj->SetName(name);
 
-			if (gameObject.value.HasMember("Position"))
+			if (sEditTemplateName.empty() && gameObject.value.HasMember("Position"))
 			{
 				const auto& pos = gameObject.value["Position"].GetArray();
 				const float x = pos[0].GetFloat();
@@ -264,8 +277,6 @@ void GameWorld::SaveTemplate(const std::filesystem::path& templateFile, const Ga
 		doc.Accept(writer);
 		fclose(file);
 	}
-	
-
 }
 
 

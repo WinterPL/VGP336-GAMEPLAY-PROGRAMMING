@@ -65,8 +65,11 @@ void PhysicsWorld::Terminate()
 
 void PhysicsWorld::Update(float deltaTime)
 {
-	mDynamicWorld->stepSimulation(deltaTime, mSettings.simulationSteps, mSettings.fixedTimeStep);
-	//mSoftBodyWorld->stepSimulation(deltaTime, mSettings.simulationSteps, mSettings.fixedTimeStep);
+	if (mEnabled)
+	{
+		mDynamicWorld->stepSimulation(deltaTime, mSettings.simulationSteps, mSettings.fixedTimeStep);
+		//mSoftBodyWorld->stepSimulation(deltaTime, mSettings.simulationSteps, mSettings.fixedTimeStep);
+	}
 
 	for (auto po : mPhysicsObjects)
 	{
@@ -76,6 +79,11 @@ void PhysicsWorld::Update(float deltaTime)
 
 void PhysicsWorld::DebugUI()
 {
+	if (mEnabled)
+	{
+		return;
+	}
+
 	ImGui::Checkbox("RenderPhysics", &mRenderDebugUI);
 	if (mRenderDebugUI)
 	{
@@ -96,6 +104,12 @@ void PhysicsWorld::DebugUI()
 		mSoftBodyWorld->debugDrawWorld();
 	}
 }
+
+void PhysicsWorld::SetEnable(bool enabled)
+{
+	mEnabled = enabled;
+}
+
 
 void PhysicsWorld::SetGravity(const WNTRmath::Vector3& gravity)
 {

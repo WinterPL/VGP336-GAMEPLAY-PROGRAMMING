@@ -69,7 +69,7 @@ void  RenderService::DebugUI()
 {
 	ImGui::Text("FPS: %f", mFPS);
 	ImGui::Separator();
-	if (ImGui::CollapsingHeader("Lighting##", ImGuiTreeNodeFlags_DefaultOpen))
+	if (ImGui::CollapsingHeader("Lighting##"))
 	   {
 		   if (ImGui::DragFloat3("Directional##Light", &mDirectionalLight.direction.x, 0.01f, -0.01f, 1.0f)){
 			   mDirectionalLight.direction = WNTRmath::Normalize(mDirectionalLight.direction);

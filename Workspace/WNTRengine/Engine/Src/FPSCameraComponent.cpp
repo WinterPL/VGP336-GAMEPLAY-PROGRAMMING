@@ -5,6 +5,7 @@
 #include "TransformComponent.h"
 #include "GameWorld.h"
 #include "UpdateService.h"
+#include "SaveUtil.h"
 
 using namespace WNTRengine;
 using namespace WNTRengine::Graphics;
@@ -62,6 +63,14 @@ void FPSCameraComponent::Update(float deltaTime)
         mTransformComponent->position = camera.GetPosition();
     }
 
+}
+
+void FPSCameraComponent::Serialize(rapidjson::Document& doc, rapidjson::Value& value)
+{
+    rapidjson::Value componentValue(rapidjson::kObjectType);
+    SaveUtil::SaveFloat("MoveSpeed", mMoveSpeed, doc, componentValue);
+    SaveUtil::SaveFloat("TurnSpeed", mTurnSpeed, doc, componentValue);
+    value.AddMember("FPSCameraComponent", componentValue, doc.GetAllocator());
 }
 
 void FPSCameraComponent::DeSerialize(const rapidjson::Value& value)

@@ -3,7 +3,7 @@
 
 using namespace WNTRengine;
 
-void SaveUtil::SaveVetor3(const char* key, const WNTRmath::Vector3& v, rapidjson::Document& doc, rapidjson::Value& member)
+void SaveUtil::SaveVector3(const char* key, const WNTRmath::Vector3& v, rapidjson::Document& doc, rapidjson::Value& member)
 {
 	rapidjson::GenericStringRef<char> str(key);
 	rapidjson::Value vecArray(rapidjson::kArrayType);
@@ -11,7 +11,18 @@ void SaveUtil::SaveVetor3(const char* key, const WNTRmath::Vector3& v, rapidjson
 	vecArray.PushBack(v.y, doc.GetAllocator());
 	vecArray.PushBack(v.z, doc.GetAllocator());
 	member.AddMember(str, vecArray, doc.GetAllocator());
-}	 
+}
+
+void WNTRengine::SaveUtil::SaveColor(const char* key, const Color& c, rapidjson::Document& doc, rapidjson::Value& member)
+{
+	rapidjson::GenericStringRef<char> str(key);
+	rapidjson::Value colorArray(rapidjson::kArrayType);
+	colorArray.PushBack(c.r, doc.GetAllocator());
+	colorArray.PushBack(c.g, doc.GetAllocator());
+	colorArray.PushBack(c.b, doc.GetAllocator());
+	colorArray.PushBack(c.a, doc.GetAllocator());
+	member.AddMember(str, colorArray, doc.GetAllocator());
+}
 	 
 void SaveUtil::SaveQuaternion(const char* key, const WNTRmath::Quaternion& q, rapidjson::Document& doc, rapidjson::Value& member)
 {	 

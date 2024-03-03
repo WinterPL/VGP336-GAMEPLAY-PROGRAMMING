@@ -1,46 +1,25 @@
 #include "EditTemplateState.h"
-
+#include "CustomFactory.h"
 using namespace WNTRengine;
 using namespace WNTRengine::Graphics;
 using namespace WNTRengine::Input;
 
-namespace
-{
-    bool CustomComponentMake(const char* componentName, const rapidjson::Value& value, GameObject& gameObject)
-    {
-        if (strcmp(componentName, "NewComponent") == 0)
-        {
-            //NewComponent* newComponent = gameObject.AddComponent<NewComponent>();
-            //newComponent->Deserialize(value);
-
-            return true;
-        }
-        return false;
-    }
-
-    bool CustomServiceMake(const char* componentName, const rapidjson::Value& value, GameWorld& gameWorld)
-    {
-        if (strcmp(componentName, "NewService") == 0)
-        {
-            //NewComponent* newComponent = gameObject.AddComponent<NewComponent>();
-            //newComponent->Deserialize(value);
-
-            return true;
-        }
-        return false;
-    }
-}
-
-
 void EditTemplateState::Initialize()
 {
-    GameObjectFactory::SetCustomMake(CustomComponentMake);
-    GameWorld::SetCustomServiceMake(CustomServiceMake);
+    GameObjectFactory::SetCustomMake(CustomComponents::CustomComponentMake);
+    GameWorld::SetCustomServiceMake(CustomComponents::CustomServiceMake);
     mGameWorld.loadLevel("../../Assets/Templates/Levels/test_level.json");
+
+    PhysicsService* ps = mGameWorld.GetService<PhysicsService>();
+    if (ps != nullptr)
+    {
+        ps->SetEnabled(false);
+    }
 }
 
 void EditTemplateState::Terminate()
 {
+
     mGameWorld.Terminate();
 }
 
@@ -56,11 +35,27 @@ void EditTemplateState::Update(float deltaTime)
 
 void EditTemplateState::DebugUI()
 {
+    ImGui::Begin("EditTemplateState", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
     mGameWorld.EditorUI();
+
+    if (ImGui::Button("Save##EditTemplate"))
+    {
+        GameObject* go = mGameWorld.GetGameObject(GameWorld::GetEditObject());
+        mGameWorld.SaveTemplate(go->GetTemplatePath(), go->GetHandle());
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Reload##EditTemplate"))
+    {
+        MainApp().ChangeState("EditTemplateState");
+    }
+    ImGui::SameLine();
     if (ImGui::Button("Exit##EditTemplate"))
     {
+        GameWorld::SetEditObject("");
         MainApp().ChangeState("EditorState");
     }
+
+    ImGui::End();
 }
 
 
