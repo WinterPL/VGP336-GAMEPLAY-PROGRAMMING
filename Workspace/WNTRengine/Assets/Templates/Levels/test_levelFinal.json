@@ -1,0 +1,41 @@
+{
+  "Name": "Test Level",
+  "Capacity": 1000,
+  "Services": {
+    "CameraService": {
+
+    },
+    "UpdateService": {
+
+    },
+    "PhysicsService": {
+      "Gravity": [ 0.0, -9.81, 0.0 ],
+      "SimStep": 10,
+      "FixedTimeStep": 0.0166666667
+    },
+    "RenderService": {
+      "LightDirection": [ 1.0, -1.0, 1.0 ],
+      "ColorAmbient"  : [ 0.4, 0.4, 0.4, 1.0 ],
+      "ColorDiffuse"  : [ 0.7, 0.7, 0.7, 1.0 ],
+      "ColorSpecular" : [ 0.9, 0.9, 0.9, 1.0 ]
+    }
+  },
+  "GameObjects": {
+    "MainCamera": {
+      "Template": "../../Assets/Templates/test_fps_Camera.json",
+      "Position": [ 0.0, 0.0, -4.0 ]
+    },
+    "Character": {
+      "Template": "../../Assets/Templates/Character.json",
+      "Position": [ 0.0, 0.0, 0.0 ]
+    },
+    "GroundObject": {
+      "Template": "../../Assets/Templates/test_ground.json",
+      "Position": [ 0.0, -2.0, 0.0 ]
+    },
+    "TestSoundObject": {
+      "Template": "../../Assets/Templates/test_Sound_Object.json",
+      "Position": [ 0.0, -2.0, 0.0 ]
+    }
+  }
+}

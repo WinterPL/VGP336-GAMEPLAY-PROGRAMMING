@@ -4,6 +4,8 @@
 #include "GameWorld.h"
 #include "RenderService.h"
 #include "SaveUtil.h"
+#include "TransformComponent.h"
+#include "UpdateService.h"
 
 using namespace WNTRengine;
 using namespace WNTRengine::Graphics;
@@ -23,7 +25,6 @@ void ModelComponent::Initialize()
 
 	RenderService* rs = GetOwner().GetWorld().GetService<RenderService>();
 	rs->Register(this);
-
 }
 void ModelComponent::Terminate()
 {

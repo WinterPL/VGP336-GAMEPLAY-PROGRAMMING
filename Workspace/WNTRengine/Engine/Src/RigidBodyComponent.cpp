@@ -1,9 +1,9 @@
 #include "Precompiled.h"
-#include "RigidBodyComponent.h"
 
 #include "GameWorld.h"
 #include "ColliderComponent.h"
 #include "TransformComponent.h"
+#include "RigidBodyComponent.h"
 #include "PhysicsService.h"
 #include "SaveUtil.h"
 

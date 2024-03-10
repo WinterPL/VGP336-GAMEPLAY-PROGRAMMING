@@ -3,6 +3,7 @@
 #include "SaveUtil.h"
 
 using namespace WNTRengine;
+using namespace WNTRengine::Input;
 
 void TransformComponent::DebugUI()
 {
