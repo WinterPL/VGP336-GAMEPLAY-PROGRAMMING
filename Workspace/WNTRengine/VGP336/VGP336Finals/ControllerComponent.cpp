@@ -35,10 +35,10 @@ void ControllerComponent::Update(float deltaTime)
 	auto input = InputSystem::Get();
 
 	if (input->IsKeyDown(KeyCode::W)) {
-		mTransformComponent->position.x += 1*deltaTime;
+		//mTransformComponent->position.x += 1*deltaTime;
 	}
 	else if (input->IsKeyDown(KeyCode::S)) {
-		mTransformComponent->position.x -= 1*deltaTime;
+		//mTransformComponent->position.x -= 1*deltaTime;
 	}
 
 	if (input->IsKeyDown(KeyCode::D)) {

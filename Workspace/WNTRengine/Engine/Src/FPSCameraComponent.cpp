@@ -84,3 +84,16 @@ void FPSCameraComponent::DeSerialize(const rapidjson::Value& value)
         mTurnSpeed = value["TurnSpeed"].GetFloat();
     }
 }
+
+void FPSCameraComponent::DebugUI()
+{
+    Camera& camera = mCameraComponent->GetCamera();
+    WNTRmath::Vector3 cam = camera.GetPosition();
+    WNTRmath::Vector3 camDir = camera.GetDirection();
+    if (ImGui::DragFloat3("Camera", &cam.x, 100.f, -100.f, 1.0f ))
+    {
+    }
+    if (ImGui::DragFloat3("CamDir", &camDir.x, 100.f, -100.f, 1.0f))
+    {
+    }
+}

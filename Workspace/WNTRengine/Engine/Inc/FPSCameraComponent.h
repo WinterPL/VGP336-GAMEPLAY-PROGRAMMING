@@ -15,6 +15,7 @@ namespace WNTRengine
 		void Initialize() override;
 		void Terminate() override;
 		void Update(float deltaTime) override;
+		void DebugUI() override;
 		void Serialize(rapidjson::Document& doc, rapidjson::Value& value) override;
 		void DeSerialize(const rapidjson::Value& value) override;
 
