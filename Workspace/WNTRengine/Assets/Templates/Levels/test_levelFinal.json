@@ -22,7 +22,7 @@
   },
   "GameObjects": {
     "MainCamera": {
-      "Template": "../../Assets/Templates/test_fps_Camera.json",
+      "Template": "../../Assets/Templates/test_Camera.json",
       "Position": [ 0.0, 0.0, -4.0 ]
     },
     "Character": {

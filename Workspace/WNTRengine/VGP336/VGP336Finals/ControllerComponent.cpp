@@ -12,15 +12,16 @@ void ControllerComponent::Initialize()
 {
 	mTransformComponent = GetOwner().GetComponent<TransformComponent>();
 	mRigidBodyComponent = GetOwner().GetComponent<RigidBodyComponent>();
+	mCameraComponent = GetOwner().GetComponent<CameraComponent>();
 	UpdateService* updateService = GetOwner().GetWorld().GetService<UpdateService>();
-	ASSERT(updateService != nullptr, "FPSCameraComponent: UpdateService is not Available");
+	ASSERT(updateService != nullptr, "ControllerComponent: UpdateService is not Available");
 	updateService->Register(this);
 }
 
 void ControllerComponent::Terminate()
 {
 	UpdateService* updateService = GetOwner().GetWorld().GetService<UpdateService>();
-	ASSERT(updateService != nullptr, "FPSCameraComponent: UpdateService is not Available");
+	ASSERT(updateService != nullptr, "ControllerComponent: UpdateService is not Available");
 	updateService->Unregister(this);
 }
 
@@ -31,71 +32,81 @@ void ControllerComponent::DebugUI()
 
 void ControllerComponent::Update(float deltaTime)
 {
-
 	auto input = InputSystem::Get();
-
+	const float moveSpeed = mMoveSpeed * deltaTime;
+	const float turnSpeed = mTurnSpeed * deltaTime;
 	if (input->IsKeyDown(KeyCode::W)) {
-		//mTransformComponent->position.x += 1*deltaTime;
+		Walk(-moveSpeed);
 	}
 	else if (input->IsKeyDown(KeyCode::S)) {
-		//mTransformComponent->position.x -= 1*deltaTime;
+		Walk(moveSpeed);
 	}
 
 	if (input->IsKeyDown(KeyCode::D)) {
-		
+		Strafe(-moveSpeed);
 	}
 	else if (input->IsKeyDown(KeyCode::A)) {
-		
+		Strafe(moveSpeed);
 	}
 
 	if (input->IsKeyDown(KeyCode::E)) {
-		
+		Yaw(turnSpeed);
 	}
 	else if (input->IsKeyDown(KeyCode::Q)) {
-		
+		Yaw(-turnSpeed);
 	}
 
-	if (input->IsMouseDown(MouseButton::RBUTTON)) {
-		
-	}
-	if (mRigidBodyComponent != nullptr)
-	{
-		mRigidBodyComponent->SetPosition(mTransformComponent->position);
-	}
+	Camera& camera = mCameraComponent->GetCamera();
+	/*float x =,y = ,z = ,
+	const WNTRmath::Vector3 vec = {x,y,z};*/
+	const WNTRmath::Vector3 r = WNTRmath::Normalize(WNTRmath::Cross(WNTRmath::Vector3::YAxis, mDirection));
+	const WNTRmath::Vector3 u = WNTRmath::Normalize(WNTRmath::Cross(mDirection, r));
+	const WNTRengine::WNTRmath::Vector3 pos = mTransformComponent->position + mDirection * 1.0f + r * -0.6f + u * 1.5f;
+	camera.SetPosition(pos);
+	camera.SetLookAt(pos - mDirection);
 }
 
 
 void ControllerComponent::Serialize(rapidjson::Document& doc, rapidjson::Value& value)
 {
-	/*rapidjson::Value componentValue(rapidjson::kObjectType);
-	SaveUtil::SaveVector3("Position", mTransform.position, doc, componentValue);
-	SaveUtil::SaveQuaternion("Rotation", mTransform.rotation, doc, componentValue);
-	SaveUtil::SaveVector3("Scale", mTransform.scale, doc, componentValue);
-	value.AddMember("TransformComponent", componentValue, doc.GetAllocator());*/
+	rapidjson::Value componentValue(rapidjson::kObjectType);
+	SaveUtil::SaveFloat("TurnSpeed", mTurnSpeed, doc, componentValue);
+	SaveUtil::SaveFloat("MoveSpeed", mMoveSpeed, doc, componentValue);
+	value.AddMember("ControllerComponent", componentValue, doc.GetAllocator());
 }
 
 void ControllerComponent::DeSerialize(const rapidjson::Value& value)
 {
-	/*if (value.HasMember("Position"))
+	if (value.HasMember("MoveSpeed"))
 	{
-		const auto& pos = value["Position"].GetArray();
-		mTransform.position.x = pos[0].GetFloat();
-		mTransform.position.y = pos[1].GetFloat();
-		mTransform.position.z = pos[2].GetFloat();
+		mMoveSpeed = value["MoveSpeed"].GetFloat();
 	}
-	if (value.HasMember("Rotation"))
+	if (value.HasMember("TurnSpeed"))
 	{
-		const auto& rot = value["Rotation"].GetArray();
-		mTransform.rotation.x = rot[0].GetFloat();
-		mTransform.rotation.y = rot[1].GetFloat();
-		mTransform.rotation.z = rot[2].GetFloat();
-		mTransform.rotation.w = rot[3].GetFloat();
+		mTurnSpeed = value["TurnSpeed"].GetFloat();
 	}
-	if (value.HasMember("Scale"))
-	{
-		const auto& s = value["Scale"].GetArray();
-		mTransform.scale.x = s[0].GetFloat();
-		mTransform.scale.y = s[1].GetFloat();
-		mTransform.scale.z = s[2].GetFloat();
-	}*/
 }
+
+void ControllerComponent::Walk(float distance)
+{
+	Vector3 velocity = mDirection * distance;
+	mRigidBodyComponent->SetVelocity(velocity);
+}
+
+void ControllerComponent::Strafe(float distance)
+{
+	const WNTRmath::Vector3 r = WNTRmath::Normalize(WNTRmath::Cross(WNTRmath::Vector3::YAxis, mDirection));
+	Vector3 velocity = r * distance;
+	mRigidBodyComponent->SetVelocity(velocity);
+}
+
+void ControllerComponent::Yaw(float radian)
+{
+	WNTRmath::Matrix4 matRotate = WNTRmath::Matrix4::RotationY(radian);
+	mDirection = WNTRmath::TransformNormal(mDirection, matRotate);
+	if (mRigidBodyComponent != nullptr)
+	{
+		mRigidBodyComponent->SetLookDirection(mDirection);
+	}
+}
+

@@ -43,8 +43,22 @@ void RigidBody::SetPosition(const WNTRengine::WNTRmath::Vector3& position)
 	mRigidBody->setWorldTransform(ConvertTobtTransform(*mGraphicsTransform));
 
 }
+void RigidBody::SetLookDirection(const WNTRengine::WNTRmath::Vector3& lookDirection)
+{
+	const WNTRmath::Vector3 l = lookDirection;
+	const WNTRmath::Vector3 r = WNTRmath::Normalize(WNTRmath::Cross(WNTRmath::Vector3::YAxis, l));
+	const WNTRmath::Vector3 u = WNTRmath::Normalize(WNTRmath::Cross(l, r));
+	btMatrix3x3 rbBasis =
+	{
+		r.x, u.x, l.x,
+		r.y, u.y, l.y,
+		r.z, u.z, l.z
+	};
+	mRigidBody->getWorldTransform().setBasis(rbBasis);
+}
 void RigidBody::SetVelocity(const WNTRengine::WNTRmath::Vector3& velocity)
 {
+	mRigidBody->activate();
 	mRigidBody->setLinearVelocity(velocity);
 }
 

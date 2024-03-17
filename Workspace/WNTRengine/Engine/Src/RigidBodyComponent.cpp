@@ -46,3 +46,11 @@ void RigidBodyComponent::SetPosition(const WNTRengine::WNTRmath::Vector3& positi
 {
 	mRigidBody.SetPosition(position);
 }
+void RigidBodyComponent::SetVelocity(const WNTRengine::WNTRmath::Vector3& velocity)
+{
+	mRigidBody.SetVelocity(velocity);
+}
+void RigidBodyComponent::SetLookDirection(const WNTRengine::WNTRmath::Vector3& lookDirection)
+{
+	mRigidBody.SetLookDirection(lookDirection);
+}

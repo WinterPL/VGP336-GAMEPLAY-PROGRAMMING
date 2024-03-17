@@ -16,6 +16,8 @@ namespace WNTRengine
 		void DeSerialize(const rapidjson::Value& value) override;
 
 		void SetPosition(const WNTRengine::WNTRmath::Vector3& position);
+		void SetLookDirection(const WNTRengine::WNTRmath::Vector3& lookDirection);
+		void SetVelocity(const WNTRengine::WNTRmath::Vector3& velocity);
 
 	private:
 		friend class PhysicsService;
