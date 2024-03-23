@@ -15,7 +15,8 @@
         "../../Assets/Models/Character/Character.animset",
         "../../Assets/Models/Character/Walking.animset",
         "../../Assets/Models/Character/Running.animset",
-        "../../Assets/Models/Character/walkback.animset"
+        "../../Assets/Models/Character/walkback.animset",
+        "../../Assets/Models/Character/ForwardFlip.animset"
       ]
     },
     "AnimatorComponent": {
@@ -32,8 +33,11 @@
       "Mass": 1.0
     },
     "ControllerComponent": {
-      "MoveSpeed": 55.0,
-      "TurnSpeed": 5
+      "MoveSpeed": 65.0,
+      "TurnSpeed": 5,
+      "IsWalking": false,
+      "IsJumping": false,
+      "JumpCD": 1.2
     }
   }
 }

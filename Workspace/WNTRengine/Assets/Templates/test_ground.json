@@ -21,8 +21,8 @@
         "MeshComponent": {
             "Shape": {
                 "Type": "Plane",
-                "Rows": 10,
-                "Columns": 10,
+                "Rows": 100,
+                "Columns": 100,
                 "Spacing": 1.0
             },
             "Material": {
@@ -61,9 +61,9 @@
             "Shape": {
                 "Type": "Hull",
                 "HalfExtents": [
-                    5.0,
+                    100.0,
                     0.10000000149011612,
-                    5.0
+                    100.0
                 ],
                 "Origin": [
                     0.0,

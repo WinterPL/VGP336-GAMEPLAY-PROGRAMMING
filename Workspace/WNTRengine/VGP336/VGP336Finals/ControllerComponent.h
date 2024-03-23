@@ -4,6 +4,7 @@
 #include "../Engine/Inc/TransformComponent.h"
 #include "../Engine/Inc/RigidBodyComponent.h"
 #include "../Engine/Inc/CameraComponent.h"
+#include "../Engine/Inc/AnimatorComponent.h"
 #include "TypeIds.h"
 
 using namespace WNTRengine;
@@ -30,7 +31,14 @@ public:
 		TransformComponent* mTransformComponent = nullptr;
 		RigidBodyComponent* mRigidBodyComponent = nullptr;
 		CameraComponent* mCameraComponent = nullptr;
+		AnimatorComponent* mAnimatorComponent = nullptr;
 		float mTurnSpeed = 5.0f;
 		float mMoveSpeed = 35.0f;
 		WNTRmath::Vector3 mDirection = WNTRmath::Vector3::ZAxis;
-	};
+
+
+		bool isWalking = false;
+		bool isJumping = false;
+		float jumpCD = 1.2f;
+		//bool isEmote = false;
+};
